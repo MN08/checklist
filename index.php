@@ -40,7 +40,7 @@ label{
     <tr>
     <td><input type="checkbox" name="check"></td>
     <td><label> todo 1</label></td>
-    <td><button>delete</button></td>
+    <td><a href="#">delete</a></td>
     </tr>
 </table>
 
