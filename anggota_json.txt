@@ -1,0 +1,1 @@
+[{"nama":"huda","goldar":"A"},{"nama":"hud","goldar":"B"},{"nama":"hua","goldar":"O"},{"nama":"hda","goldar":"AB"}]
