@@ -1,3 +1,24 @@
+<?php
+
+$todos = [];
+$file = file_get_contents("todo.txt");
+$todos = unserialize($file);
+
+if(isset($_POST['todo'])){
+    $data = $_POST['todo'];
+    $todos[] = [
+
+        'todo' => $data,
+        'status => 0'
+
+    ];
+    file_put_contents("todo.txt",serialize($todos));
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,13 +51,15 @@ label{
 <h1>Checklist App</h1>
 <hr>
 <br><br>
-<form action="">
+<form method ="POST">
     <label>have i done somthing ?</label><br><br>
     <input type="text" name="todo">
-    <button type="submit">save</button>
+    <button type="submit">add</button>
 </form>
 
-<table>
+<br><br>
+
+<table align="center">
     <tr>
     <td><input type="checkbox" name="check"></td>
     <td><label> todo 1</label></td>
