@@ -1,8 +1,10 @@
 <?php
 
 $todos = [];
+if(file_exists('todo.txt')){
 $file = file_get_contents("todo.txt");
 $todos = unserialize($file);
+}
 
 if(isset($_POST['todo'])){
     $data = $_POST['todo'];
@@ -42,7 +44,7 @@ hr{
 }
 label{
     font-size :20px;
-    color : white;
+    color : darkgreen;
 }
 </style>
 </head>
@@ -60,11 +62,13 @@ label{
 <br><br>
 
 <table align="center">
+    <?php foreach ($todos as $key => $value) :?> 
     <tr>
     <td><input type="checkbox" name="check"></td>
-    <td><label> todo 1</label></td>
+    <td><label> <?php echo $value['todo']; ?></label></td>
     <td><a href="#">delete</a></td>
     </tr>
+    <?php endforeach?>
 </table>
 
 </div>
