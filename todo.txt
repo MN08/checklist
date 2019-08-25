@@ -1,1 +1,1 @@
-a:1:{i:0;a:2:{s:4:"todo";s:12:"bangun tidur";s:6:"status";s:1:"0";}}
+a:2:{i:1;a:2:{s:4:"todo";s:5:"nobar";s:6:"status";i:0;}i:2;a:2:{s:4:"todo";s:11:"ke burjonan";s:6:"status";i:0;}}

@@ -14,14 +14,23 @@ if(isset($_POST['todo'])){
         'status' => 0
 
     ];
-    file_put_contents("todo.txt",serialize($todos));
-    header('Location:index.php');
+    saveData($todos);
 }
 
 if(isset($_GET['status'])){
     $todos[$_GET['key']]['status']=$_GET['status'];
+    saveData($todos);
+}
+
+if(isset($_GET['hapus'])){
+    unset($todos[$_GET['key']]);
+    saveData($todos);
+}
+
+function saveData($todos){
     file_put_contents("todo.txt",serialize($todos));
     header('Location:index.php');
+
 }
 
 print_r($todos);
@@ -90,7 +99,7 @@ print_r($todos);
             </label>
         </td>
         <td>
-        <a href="#">delete</a>
+        <a href="index.php?hapus=1&key=<?php echo $key; ?>" onclick="return confirm('are sure want to remove this todo?')">delete</a>
         </td>
     </tr>
 <?php endforeach?>
