@@ -11,13 +11,20 @@ if(isset($_POST['todo'])){
     $todos[] = [
 
         'todo' => $data,
-        'status => 0'
+        'status' => 0
 
     ];
     file_put_contents("todo.txt",serialize($todos));
+    header('Location:index.php');
 }
 
+if(isset($_GET['status'])){
+    $todos[$_GET['key']]['status']=$_GET['status'];
+    file_put_contents("todo.txt",serialize($todos));
+    header('Location:index.php');
+}
 
+print_r($todos);
 ?>
 
 
@@ -30,45 +37,63 @@ if(isset($_POST['todo'])){
     <title>Checklist App | Konyil</title>
 
 <style>
-body{
-    background-color: #9f93b1;
-}
-.container{
-    text-align : center;
-}
-hr{
-    background-color : #eee;
-    border : 0;
-    height : 5px;
-    width : 420px;
-}
-label{
-    font-size :20px;
-    color : darkgreen;
-}
+    body{
+        background-color: #9f93b1;
+    }
+    .container{
+        text-align : center;
+    }
+    hr{
+        background-color : #eee;
+        border : 0;
+        height : 5px;
+        width : 420px;
+    }
+    label{
+        font-size :20px;
+        color : darkgreen;
+    }
 </style>
 </head>
+
 <body>
+
 <div class="container">
 <h1>Checklist App</h1>
 <hr>
 <br><br>
+
 <form method ="POST">
     <label>have i done somthing ?</label><br><br>
     <input type="text" name="todo">
     <button type="submit">add</button>
 </form>
-
 <br><br>
 
 <table align="center">
-    <?php foreach ($todos as $key => $value) :?> 
+<?php foreach ($todos as $key => $value) :?> 
     <tr>
-    <td><input type="checkbox" name="check"></td>
-    <td><label> <?php echo $value['todo']; ?></label></td>
-    <td><a href="#">delete</a></td>
+        <td>
+            <input type="checkbox" name="todo" onclick="window.location.href='index.php?status=<?php echo ($value['status']==1)?'0':'1' ?>&key=<?php echo $key;?>'"
+            <?php if ($value['status']==1) echo 'checked'; ?>>
+        </td>
+        <td>
+            <label>
+            <?php
+                if($value['status']==1){
+                    echo '<del>'.$value['todo'].'</del>'; 
+                }
+                else{
+                    echo $value['todo']; 
+                }
+            ?>
+            </label>
+        </td>
+        <td>
+        <a href="#">delete</a>
+        </td>
     </tr>
-    <?php endforeach?>
+<?php endforeach?>
 </table>
 
 </div>
